@@ -16,3 +16,7 @@ HumHub Change Log
 - Fix #4199: Pinned posts of other spaces are excluded from profile stream
 - Enh #3995: Added additional user profile stream filter to include or exclude non profile stream content
 - Enh: Added `humhub\modules\stream\actions\Stream:initQuery` to manage query filter in subclasses
+- Enh #4213: Only render topic chooser if there are topics available or user can create topics
+- Enh: Added `humhub\modules\ui\form\widgets\ActiveField:preventRendering` to manage render state within field classes
+- Enh: Added `humhub\modules\ui\form\widgets\JsInputWidget:emptyResult()` helper to manage render state of JsInputWidget
+- Enh: Added `humhub\modules\ui\form\widgets\JsInputWidget:field` in order to access ActiveField instances within JsInputWidget
