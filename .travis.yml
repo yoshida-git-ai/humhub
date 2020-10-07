@@ -30,7 +30,7 @@ script:
 - 'sleep 5 && curl --fail --head http://127.0.0.1:8080/index-test.php'
 - 'cd protected/humhub/tests'
 - 'php ../../vendor/bin/codecept build'
-- 'php ../../vendor/bin/codecept run --env travis'
+- 'php ../../vendor/bin/codecept run --env travis -d'
 - 'cd ../../../'
 after_failure:
 - .travis/upload-failure.sh
