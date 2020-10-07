@@ -11,7 +11,7 @@
         "wiki": "https://community.humhub.com",
         "source": "https://github.com/humhub/humhub"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
         "ext-exif": "*",
@@ -52,7 +52,7 @@
         "raoul2000/yii2-jcrop-widget": "*",
         "twig/twig": "^1.0",
         "xj/yii2-jplayer-widget": "*",
-        "yiisoft/yii2": "2.0.38",
+        "yiisoft/yii2": "dev-master",
         "yiisoft/yii2-authclient": "~2.2.0",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-httpclient": "~2.0.0",
@@ -73,10 +73,12 @@
         "codeception/specify": "^1.0",
         "codeception/verify": "~0.5.0 || ~1.1.0",
         "symfony/browser-kit": ">=2.7 <=4.2.4",
+        "phpcompatibility/php-compatibility": "*",
         "yiisoft/yii2-debug": "~2.1.0",
         "yiisoft/yii2-faker": "~2.0.0",
         "yiisoft/yii2-gii": "~2.1.0"
     },
+    "prefer-stable" : true,
     "repositories": [
         {
             "type": "composer",
@@ -97,7 +99,12 @@
     "scripts": {
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject"
-        ]
+        ],
+        "post-install-cmd": "\"protected/vendor/bin/phpcs\" --config-set installed_paths protected/vendor/phpcompatibility/php-compatibility",
+        "post-update-cmd" : "\"protected/vendor/bin/phpcs\" --config-set installed_paths protected/vendor/phpcompatibility/php-compatibility"
+    },
+    "autoload": {
+        "psr-4": { "humhub\\modules\\": ["protected/modules"] }
     },
     "extra": {
         "yii\\composer\\Installer::postCreateProject": {
