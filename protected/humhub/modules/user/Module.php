@@ -138,6 +138,12 @@ class Module extends \humhub\components\Module
         6 => 20,
     ];
 
+     /**
+     * email address in searches.
+     * @since 1.11
+     */
+     public $includeEmailInSearch = false; 
+    
     /**
      * @inheritdoc
      */
