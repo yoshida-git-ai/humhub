@@ -1,3 +1,5 @@
+// Kurahito Yoshida Japanese Language
+
 <?php
 /**
  * @link https://www.humhub.org/
@@ -20,12 +22,12 @@ use yii\helpers\Html;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 /* @var $addModel \humhub\modules\topic\models\Topic */
-
+/* @var $title string */
 ?>
 
 
 <div class="panel panel-default">
-    <div class="panel-heading"><?= Yii::t('TopicModule.base', '<strong>Topic</strong> Overview'); ?></div>
+    <div class="panel-heading"><?= $title ?></div>
 
     <?php if ($contentContainer instanceof Space) : ?>
         <?= DefaultMenu::widget(['space' => $contentContainer]); ?>
@@ -36,6 +38,7 @@ use yii\helpers\Html;
     <div class="panel-body">
 
         <?php $form = ActiveForm::begin(); ?>
+        <p><?= Yii::t('TopicModule.base', '投稿で使用するトピックを追加します。 トピックには個人的な興味や一般的な用語を使用できます。 投稿する際に「トピック」を選択すると、そのトピックに関連する投稿を他のユーザーが見つけやすくなります。') ?></p>
         <div class="form-group">
             <div class="input-group">
                 <?= Html::activeTextInput($addModel, 'name', ['style' => 'height:36px', 'class' => 'form-control', 'placeholder' => Yii::t('TopicModule.base', 'Add Topic')]) ?>
