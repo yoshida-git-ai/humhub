@@ -1,3 +1,5 @@
+// Kurahito Yoshida Japanese Language
+
 <?php
 
 /**
@@ -29,7 +31,7 @@ class ContentCreatedNotificationCategory extends NotificationCategory
      */
     public function getDescription()
     {
-        return Yii::t('ContentModule.notifications', 'Receive Notifications for new content you follow.');
+        return Yii::t('ContentModule.notifications', 'フォローしているコンテンツの通知を受け取る');
     }
 
     /**
@@ -37,7 +39,7 @@ class ContentCreatedNotificationCategory extends NotificationCategory
      */
     public function getTitle()
     {
-        return Yii::t('ContentModule.notifications', 'New Content');
+        return Yii::t('ContentModule.notifications', 'コンテンツ');
     }
 
 }
