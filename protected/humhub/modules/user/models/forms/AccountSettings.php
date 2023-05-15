@@ -1,3 +1,5 @@
+// Kurahito Yoshida Japanese Language
+
 <?php
 
 /**
@@ -8,14 +10,17 @@
 
 namespace humhub\modules\user\models\forms;
 
+use humhub\modules\user\helpers\AuthHelper;
+use humhub\modules\user\models\User;
 use Yii;
+use yii\base\Model;
 
 /**
  * Form Model for changing basic account settings
  *
  * @since 0.9
  */
-class AccountSettings extends \yii\base\Model
+class AccountSettings extends Model
 {
 
     public $tags;
@@ -35,7 +40,8 @@ class AccountSettings extends \yii\base\Model
             [['show_introduction_tour'], 'boolean'],
             [['timeZone'], 'in', 'range' => \DateTimeZone::listIdentifiers()],
             ['language', 'in', 'range' => array_keys(Yii::$app->i18n->getAllowedLanguages())],
-            ['visibility', 'in', 'range' => [1, 2]],
+            ['visibility', 'in', 'range' => array_keys($this->getVisibilityOptions()),
+                'when' => function (self $model) {return $model->isVisibilityEditable();}],
         ];
     }
 
@@ -45,13 +51,58 @@ class AccountSettings extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'tags' => Yii::t('UserModule.account', 'Tags'),
+            'tags' => Yii::t('UserModule.account', 'Profile Tags'),
             'language' => Yii::t('UserModule.account', 'Language'),
             'show_introduction_tour' => Yii::t('UserModule.account', 'Hide introduction tour panel on dashboard'),
             'timeZone' => Yii::t('UserModule.account', 'TimeZone'),
             'visibility' => Yii::t('UserModule.account', 'Profile visibility'),
             'blockedUsers' => Yii::t('UserModule.account', 'Blocked users'),
         ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'tags' => Yii::t('UserModule.account', '自分を説明し、スキルや興味を強調するタグをプロフィールに追加します。 タグはプロフィールと「人」ディレクトリに表示されます。'),
+        ];
+    }
+
+    public function getTags(): array
+    {
+        return is_array($this->tags) ? $this->tags : [];
+    }
+
+    public function isHiddenUser(): bool
+    {
+        return Yii::$app->user->getIdentity()->visibility == User::VISIBILITY_HIDDEN;
+    }
+
+    public function isVisibilityViewable(): bool
+    {
+        return AuthHelper::isGuestAccessEnabled();
+    }
+
+    public function isVisibilityEditable(): bool
+    {
+        return Yii::$app->user->isAdmin() ||
+            ($this->isVisibilityViewable() && !$this->isHiddenUser());
+    }
+
+    public function getVisibilityOptions(): array
+    {
+        $options = [
+            User::VISIBILITY_REGISTERED_ONLY => Yii::t('UserModule.account', 'Registered users only'),
+        ];
+
+        if (AuthHelper::isGuestAccessEnabled()) {
+            $options[User::VISIBILITY_ALL] = Yii::t('UserModule.account', 'Visible for all (also unregistered users)');
+        }
+
+        if ($this->isHiddenUser() || Yii::$app->user->isAdmin()) {
+            $options[User::VISIBILITY_HIDDEN] = Yii::t('AdminModule.user', 'Invisible');
+        }
+
+        return $options;
     }
 
 }
