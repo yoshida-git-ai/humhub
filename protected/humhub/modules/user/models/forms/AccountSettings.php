@@ -51,7 +51,7 @@ class AccountSettings extends Model
     public function attributeLabels()
     {
         return [
-            'tags' => Yii::t('UserModule.account', 'Profile Tags'),
+            'tags' => Yii::t('UserModule.account', 'プロフィール タグ'),
             'language' => Yii::t('UserModule.account', 'Language'),
             'show_introduction_tour' => Yii::t('UserModule.account', 'Hide introduction tour panel on dashboard'),
             'timeZone' => Yii::t('UserModule.account', 'TimeZone'),
