@@ -1,3 +1,5 @@
+// Kurahito Yoshida Update check false for private network
+
 <?php
 
 /**
@@ -41,7 +43,7 @@ class Module extends \humhub\components\Module
     /**
      * @var boolean check daily for new HumHub version
      */
-    public $dailyCheckForNewVersion = true;
+    public $dailyCheckForNewVersion = false;
 
     /**
      * @var boolean allow admins to impersonate other users
