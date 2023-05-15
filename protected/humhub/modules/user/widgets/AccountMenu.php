@@ -1,3 +1,5 @@
+// Kurahito Yoshida Japanese Language
+
 <?php
 
 /**
@@ -8,6 +10,7 @@
 
 namespace humhub\modules\user\widgets;
 
+use humhub\modules\user\models\User;
 use humhub\modules\user\Module;
 use Yii;
 use humhub\modules\ui\menu\MenuLink;
@@ -28,7 +31,7 @@ class AccountMenu extends LeftNavigation
      */
     public function init()
     {
-        $this->panelTitle = Yii::t('UserModule.account', '<strong>Account</strong> settings');
+        $this->panelTitle = Yii::t('UserModule.account', '<strong>ユーザー</strong> アカウント');
 
         $this->addEntry(new MenuLink([
             'label' => Yii::t('UserModule.account', 'Profile'),
@@ -49,7 +52,7 @@ class AccountMenu extends LeftNavigation
         ]));
 
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('UserModule.account', 'Settings'),
+            'label' => Yii::t('UserModule.account', 'アカウント設定'),
             'id' => 'account-settings-settings',
             'icon' => 'wrench',
             'url' => ['/user/account/edit-settings'],
@@ -70,6 +73,8 @@ class AccountMenu extends LeftNavigation
             ]));
         }
 
+        /* @var User $user */
+        $user = Yii::$app->user->getIdentity();
         $this->addEntry(new MenuLink([
             'label' => Yii::t('UserModule.account', 'Modules'),
             'id' => 'account-settings-modules',
@@ -77,7 +82,7 @@ class AccountMenu extends LeftNavigation
             'url' => ['/user/account/edit-modules'],
             'sortOrder' => 120,
             'isActive' => MenuLink::isActiveState('user', 'account', 'edit-modules'),
-            'isVisible' => (count(Yii::$app->user->getIdentity()->getAvailableModules()) !== 0)
+            'isVisible' => (count($user->moduleManager->getAvailable()) !== 0)
         ]));
 
         parent::init();
