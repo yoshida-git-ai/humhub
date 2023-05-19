@@ -719,7 +719,7 @@ class User extends ContentContainerActiveRecord implements IdentityInterface, Se
     public function getSearchAttributes()
     {
         $attributes = [
-            'email' => $this->email,
+            //'email' => $this->email,
             'username' => $this->username,
             'tags' => implode(', ', $this->getTags()),
             'firstname' => $this->profile->firstname,
