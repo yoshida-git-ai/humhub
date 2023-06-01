@@ -124,7 +124,9 @@ class Module extends \humhub\components\Module
      * @var bool disable profile stream
      * @since 1.6
      */
-    public $profileDisableStream = false;
+    //yoshida stream disable
+    //public $profileDisableStream = false;
+    public $includeEmailInSearch = true; 
 
     /**
      * Account login blocking times after attempted incorrect logins.
