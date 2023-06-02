@@ -153,8 +153,8 @@ class UserFilter extends User
         foreach ($parts as $part) {
             $query->andFilterWhere(
                     ['or',
-                        ['like', 'user.email', $part],
-                        ['like', 'user.username', $part],
+                        //['like', 'user.email', $part],
+                        //['like', 'user.username', $part],
                         ['like', 'profile.firstname', $part],
                         ['like', 'profile.lastname', $part],
                         ['like', 'profile.title', $part]
